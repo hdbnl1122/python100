@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" >
+		<title>BOM-延迟跳转</title>
+	</head>
+	<body>
+		<h3><span id="countdown">5</span>秒钟以后自动跳转到百度</h3>
+		<button id="cancelbtn">取消跳转</button>
+		<button id="openbtn">打开百度</button>
+		<script>
+			const openbtn = document.getElementById('openbtn')
+			openbtn.addEventListener('click', () => print())
+			const cancelbtn = document.getElementById('cancelbtn')
+			cancelbtn.addEventListener('click',() => clearInterval(timerId))
+			const span = document.getElementById('countdown')
+			var counter = 5
+			var timerId = setInterval(function(){
+				counter -= 1
+				if (counter == 0) {
+					location.href = 'https://www.baidu.com'
+				}else{
+					span.textContent = counter
+				}
+			},1000)
+		</script>
+	</body>
+</html>
