@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				
+			}
+			#fruits{
+				width: 120px;
+				margin: 20px 20px;
+			}
+			#fruits>li{
+				list-style-type: none;
+				height: 40px;
+				color: white;
+				background-color: #009966;
+				line-height: 40px;
+				text-align: center;
+				margin-top: 2px;
+				
+			}
+			#fruits>li>a{
+				float: right;
+				color: white;
+				text-decoration: none;
+				
+			}
+			#fruits~input{
+				border: none;
+				outline: none;
+				text-align: center;
+				margin: 20px 15px;
+			}
+			input[type=text]{
+				border-bottom: 1px solid gray !important;
+			}
+			#ok{
+				width: 80px;
+				height: 30px;
+				background-color: #CC3333;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<ul id="fruits">
+				<li>苹果<a href="">x</a></li>
+				<li>香蕉<a href="">x</a></li>
+				<li>火龙果<a href="">x</a></li>
+				<li>西瓜<a href="">x</a></li>
+			</ul>
+			<input type="text" name="fruit" />
+			<input id="ok" type="button" value="确定" />
+		</div>
+		<script>
+			function addlistitem(){
+				let name = input.value.trim()
+				if (name) {
+					let li = document.createElement('li')
+					li.innerHTML = name
+					let a = document.createElement('a')
+					a.innerHTML = '&times;'
+					a.href = ''
+					a.addEventListener('click',removelistitem)
+					li.appendChild(a)
+					ul.appendChild(li)
+					input.value = ''
+					input.focus()
+				}
+			}
+			function removeListItem(evt) {
+				evt.preventDefault()
+				let li = evt.target.parentNode
+				ul.removeChild(li)
+			}
+			const ul = document.querySelector('#fruits')
+			const input = ul.nextElementSibling
+			input.addEventListener('keypress', (evt) => {
+				let code = evt.keyCode || evt.which
+				if (code == 13) {
+					addListItem()
+				}
+			})
+			const ok = input.nextElementSibling
+			ok.addEventListener('click', addListItem)
+			let anchors = document.querySelectorAll('#fruits>li>a')
+			for (let i = 0; i < anchors.length; i += 1) {
+				anchors[i].addEventListener('click', removeListItem)
+			}
+		</script>
+	</body>
+</html>
